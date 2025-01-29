@@ -55,3 +55,23 @@ int recvPDU(int socketNumber, uint8_t * dataBuffer, int bufferSize) {
     }
     return bytesReceived;
 }
+
+void getFromPDU(uint8_t * pduBuffer, uint8_t * buffer, int size, int * lastIndex){
+	memcpy(buffer, pduBuffer + *lastIndex, sizeof(uint8_t) * size);
+	*lastIndex = *lastIndex + size;
+}
+
+void getFromPDUWithChar(uint8_t * pduBuffer, char * buffer, int size, int * lastIndex){
+	memcpy(buffer, pduBuffer + *lastIndex, sizeof(char) * size);
+	*lastIndex = *lastIndex + size;
+}
+
+void createPDU(uint8_t * data_buffer, uint8_t * value, int size, int * lastIndex) {
+	memcpy(data_buffer + *lastIndex, value, sizeof(uint8_t) * size);  // flag
+	*lastIndex = *lastIndex + size;
+}
+
+void createPDUWithChar(uint8_t * data_buffer, char * value, int size, int * lastIndex) {
+	memcpy(data_buffer + *lastIndex, value, sizeof(uint8_t) * size);  // flag
+	*lastIndex = *lastIndex + size;
+}
